@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    hostname: "${HOSTNAME}"  # This will set the hostname of the container to the same as the host
+    restart: unless-stopped
+    ports:
+      - "61208-61209:61208-61209"
+    environment:
+      - GLANCES_OPT=-w
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    pid: "host"
